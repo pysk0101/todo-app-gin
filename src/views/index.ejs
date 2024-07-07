@@ -5,6 +5,15 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Görsel Todolist</title>
+	<!-- Bootstrap CSS -->
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Font Awesome -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+	<!-- Custom CSS -->
 	<style>
 		body {
 			margin: 0;
@@ -24,7 +33,6 @@
 		}
 
 		header h1 {
-			text-align: center;
 			color: #333;
 		}
 
@@ -85,21 +93,7 @@
 			margin-left: 10px;
 		}
 
-		.todo-list .delete-btn {
-			background: #dc3545;
-			color: white;
-			border: none;
-			border-radius: 5px;
-			cursor: pointer;
-			padding: 5px 10px;
-		}
-
-		.todo-list .delete-btn:hover {
-			background: #c82333;
-		}
-
 		footer p {
-			text-align: center;
 			color: #777;
 			margin-top: 20px;
 		}
@@ -108,52 +102,63 @@
 
 <body>
 	<div class="container">
-		<header>
-			<h1>Todolist</h1>
-		</header>
+		<header class="text-center py-5">
+			<h1 class="animate__animated animate__fadeInDown">Todolist</h1>
+		</header>	
 		<main>
-			<form action="/todo/add" method="POST" class="todo-input">
-
+			<form action="/todo/add" method="POST" class="todo-input animate__animated animate__fadeInUp">
 				<input type="text" id="todo" name="content" placeholder="Yeni Görev Ekle" required>
-
-				<input type="hidden" id="userId" name="userId" value="668aa0a0da96738508742418"
-					style=" margin-right: 10px;">
-
-					<select name="tag" id="tag" required>
-						<option value="" disabled selected>Etiket Seçiniz</option>
-						<% user.tags.forEach(function(tag) { %>
-							<option value="<%= tag %>"><%= tag %></option>
+				<input type="hidden" id="userId" name="userId" value="668aa0a0da96738508742418">
+				<select name="tag" id="tag" required>
+					<option value="" disabled selected>Etiket Seçiniz</option>
+					<% user.tags.forEach(function(tag) { %>
+						<option value="<%= tag %>">
+							<%= tag %>
+						</option>
 						<% }); %>
-					</select>
-
-				<button type="submit">Add</button>
+				</select>
+				<button type="submit" class="btn btn-success">Add</button>
 			</form>
 
-			<ul class="todo-list">
+			<ul class="todo-list mt-4">
 				<% todos.forEach(todo=> { %>
-					<li class="<%= todo.completed ? 'completed' : '' %>">
+					<li
+						class="d-flex justify-content-between align-items-center p-3 mb-2 animate__animated animate__fadeIn <%= todo.completed ? 'completed' : '' %>">
 						<div>
 							<span>
 								<%= todo.content %>
 							</span>
-							<span class="tag" style="background-color: blueviolet;">
+							<span class="tag badge badge-primary ml-2">
 								<%= todo.tag %>
 							</span>
 						</div>
 						<div>
-							<button class="delete-btn" style="background-color:#007bff;">Complete</button>
-							<button class="delete-btn">Delete</button>
+							<button class="btn btn-info btn-sm mr-2"
+								onclick="completeTodo('<%= todo._id %>')">Complete</button>
+							<button class="btn btn-danger btn-sm"
+								onclick="deleteTodo('<%= todo._id %>')">Delete</button>
 						</div>
 					</li>
 					<% }) %>
 			</ul>
-			<script>
-			</script>
 		</main>
-		<footer>
+		<footer class="text-center py-4">
 			<p>© 2024 Todolist Uygulaması</p>
 		</footer>
 	</div>
+	<!-- Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script>
+		function completeTodo(todoId) {
+			// Complete todo logic here
+		}
+
+		function deleteTodo(todoId) {
+			// Delete todo logic here
+		}
+	</script>
 </body>
 
 </html>
