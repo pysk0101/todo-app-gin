@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Görsel Todolist</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			font-family: 'Roboto', sans-serif;
+			background: linear-gradient(135deg, #f8f9fa, #e0e0e0);
+		}
+
+		.container {
+			max-width: 600px;
+			margin: 0 auto;
+			padding: 20px;
+			background: white;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+			border-radius: 10px;
+			overflow: hidden;
+		}
+
+		header h1 {
+			text-align: center;
+			color: #333;
+		}
+
+		.todo-input {
+			display: flex;
+			justify-content: space-between;
+			margin-bottom: 20px;
+		}
+
+		.todo-input input,
+		.todo-input select {
+			flex: 1;
+			padding: 10px;
+			border: 2px solid #ddd;
+			border-radius: 5px;
+			margin-right: 10px;
+		}
+
+		.todo-input button {
+			padding: 10px 20px;
+			background: #28a745;
+			color: white;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+
+		.todo-input button:hover {
+			background: #218838;
+		}
+
+		.todo-list {
+			list-style: none;
+			padding: 0;
+		}
+
+		.todo-list li {
+			background: #f8f9fa;
+			padding: 15px;
+			margin-bottom: 10px;
+			border-radius: 5px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+		}
+
+		.todo-list li.completed {
+			text-decoration: line-through;
+			background: #d4edda;
+		}
+
+		.todo-list .tag {
+			background: #007bff;
+			color: white;
+			border-radius: 3px;
+			padding: 5px 10px;
+			margin-left: 10px;
+		}
+
+		.todo-list .delete-btn {
+			background: #dc3545;
+			color: white;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			padding: 5px 10px;
+		}
+
+		.todo-list .delete-btn:hover {
+			background: #c82333;
+		}
+
+		footer p {
+			text-align: center;
+			color: #777;
+			margin-top: 20px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<header>
+			<h1>Todolist</h1>
+		</header>
+		<main>
+			<form action="/todo/add" method="POST" class="todo-input">
+
+				<input type="text" id="todo" name="content" placeholder="Yeni Görev Ekle" required>
+
+				<input type="hidden" id="userId" name="userId" value="668aa0a0da96738508742418"
+					style=" margin-right: 10px;">
+
+					<select name="tag" id="tag" required>
+						<option value="" disabled selected>Etiket Seçiniz</option>
+						<% user.tags.forEach(function(tag) { %>
+							<option value="<%= tag %>"><%= tag %></option>
+						<% }); %>
+					</select>
+
+				<button type="submit">Add</button>
+			</form>
+
+			<ul class="todo-list">
+				<% todos.forEach(todo=> { %>
+					<li class="<%= todo.completed ? 'completed' : '' %>">
+						<div>
+							<span>
+								<%= todo.content %>
+							</span>
+							<span class="tag" style="background-color: blueviolet;">
+								<%= todo.tag %>
+							</span>
+						</div>
+						<div>
+							<button class="delete-btn" style="background-color:#007bff;">Complete</button>
+							<button class="delete-btn">Delete</button>
+						</div>
+					</li>
+					<% }) %>
+			</ul>
+			<script>
+			</script>
+		</main>
+		<footer>
+			<p>© 2024 Todolist Uygulaması</p>
+		</footer>
+	</div>
+</body>
+
+</html>
