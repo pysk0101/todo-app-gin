@@ -4,10 +4,12 @@ import Todos from '../models/todoModel';
 import User from '../models/userModel'
 
 const getTodos = async (req: Request, res: Response) => {
-    const user = await User.findById("668aa0a0da96738508742418")
-    console.log(user?.tags)
-    const todos = await Todos.find();
-    res.render('index', {
+    const user = await User.findById("668b7be643d8ed14efb8a802")
+    if (!user) {
+        return res.send("This user is invalid. Please add the user first.")
+    }
+    const todos = await Todos.find({ userId: user._id});
+    res.render('todo', {
         todos: todos,
         user: user
     });
@@ -15,7 +17,6 @@ const getTodos = async (req: Request, res: Response) => {
 
 const createTodo = async (req: Request, res: Response) => {
     try {
-        console.log(req.body)
         const { userId, tag, content } = req.body;
         const user = await User.findById(req.body.userId)
         if (!user) {
@@ -45,6 +46,7 @@ const createTodo = async (req: Request, res: Response) => {
     }
 }
 
+const createTag = async (req: Request, res: Response) => {}
 
 
-export { getTodos, createTodo }
+export { getTodos, createTodo,createTag }

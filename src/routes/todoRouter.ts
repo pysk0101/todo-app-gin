@@ -1,8 +1,9 @@
 import express from "express";
 const router = express.Router();
 
-import {getTodos,createTodo} from "../controllers/todoController";
+import verifyJWT from "../middlewares/verifyJWT";
+import {getTodos,createTodo,createTag} from "../controllers/todoController";
 
-router.get("/", getTodos).post("/add", createTodo);
+router.get("/" ,verifyJWT,getTodos).post("/add", createTodo).post("/addTag",createTag);
 
 export default router;
