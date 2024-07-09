@@ -108,7 +108,7 @@
 		<main>
 			<form action="/todo/add" method="POST" class="todo-input animate__animated animate__fadeInUp">
 				<input type="text" id="todo" name="content" placeholder="Yeni Görev Ekle" required>
-				<input type="hidden" id="userId" name="userId" value="668aa0a0da96738508742418">
+				<input type="hidden" id="userId" name="userId" value="<%= user._id %>">
 				<select name="tag" id="tag" required>
 					<option value="" disabled selected>Etiket Seçiniz</option>
 					<% user.tags.forEach(function(tag) { %>
