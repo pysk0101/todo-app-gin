@@ -1,35 +1,61 @@
 import { Request, Response } from 'express';
-import Users from '../models/userModel';
+import User from '../models/userModel';
 
-
-const createUser = async (req: Request, res: Response) => {
-    const { name, email, password } = req.body;
-    console.log(req.body)
-
-    if (!name || !email || !password) res.status(400).send("Tüm alanları doldurunuz")
-
-    const duplicate = await Users.findOne({ email: email });
-    if (duplicate) return res.status(409).send("Bu email zaten kayıtlı");
-
+const getUser = async (req: Request, res: Response) => {
     try {
+        
+        const userId = req.params.userId;
+        const user = await User.findById(userId)
+        if (!user) {
+            return res.send("GET USER DA BIR PROBLEM OLDU ASLAN PARCASI")
+        }
 
-        const users = await Users.find()
-        console.log(users)
-        // const lastId = users[users.length - 1].id
+        const completedCount = await user.getCompletedTodos();
 
-        const newUser = new Users({
-            name,
-            email,
-            password
-        })
-
-        await newUser.save()
-        res.send(newUser)
-    } catch (error) {
-        // res.status(500).redirect("/register")
+        res.render('profile', {user: user, completedCount: completedCount}, );
+    } catch (error: any) {
         res.send(error)
     }
 }
 
+const createTag = async (req: Request, res: Response) => {
+    try {
+        const userId = req.cookies.userId;
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.send("Kullanıcı bulunamadı");
+        }
+        const { newTag } = req.body;
+        if(user.tags.includes(newTag)) return res.send("Bu etiket zaten var");
 
-export { createUser }
+        user.tags.push(newTag);
+        await user.save();
+
+        res.redirect(`/user/${userId}`);    
+        
+    } catch (error:any) {
+        res.send(error)
+    }    
+}
+
+const deleteTag = async (req: Request, res: Response) => {
+    try {
+        const userId = req.cookies.userId;
+        const { tagName } = req.body;
+        const user = await User.findById(userId);
+
+        if (!user) {
+            return res.send("Kullanıcı bulunamadı");
+        }
+
+        user.tags = user.tags.filter(tag => tag !== tagName);
+        await user.save();
+
+        res.json({ success: true, redirectUrl: `/user/${userId}` });
+
+    } catch (error: any) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+}
+
+export {  getUser , createTag , deleteTag}

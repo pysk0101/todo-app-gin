@@ -1,13 +1,27 @@
-import mongoose, { model } from "mongoose";
+import { Schema, model, Document } from 'mongoose';
 
-const todoSchema = new mongoose.Schema({
-     userId : {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Student",
+// Todo belgesinin alanlarını tanımlayan interface
+interface Todo {
+    userId: import('mongoose').Types.ObjectId;
+    tag: string;
+    content: string;
+    completed: boolean;
+}
+
+// Todo belgesini ve Mongoose Document özelliklerini birleştiren interface
+interface TodoDocument extends Todo, Document {
+    _id: Schema.Types.ObjectId;
+}
+
+// Todo şemasını oluşturma
+const TodoSchema: Schema<TodoDocument> = new Schema({
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Student', // Student yerine User veya uygun koleksiyon adı
         required: true
     },
     tag: {
-        type : String,
+        type: String,
         required: true
     },
     content: {
@@ -20,5 +34,7 @@ const todoSchema = new mongoose.Schema({
     }
 });
 
-const Todo = model('Todo', todoSchema);
-export default Todo
+// Todo modelini oluşturma
+const TodoModel = model<TodoDocument>('Todo', TodoSchema);
+
+export default TodoModel;
