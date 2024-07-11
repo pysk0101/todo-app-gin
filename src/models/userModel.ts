@@ -1,6 +1,27 @@
-import mongoose from "mongoose";
+import mongoose, { Schema, Document, Model } from "mongoose";
+import TodoModel from "./todoModel";
 
-const userSchema = new mongoose.Schema({
+interface User {
+    name: string;
+    email: string;
+    password: string;
+    todos: Schema.Types.ObjectId[];
+    tags: string[];
+    createdAt: Date;
+    updatedAt: Date;
+    completedTodos?: number;
+    getCompletedTodos(): Promise<number>;
+    getNumber(): number;
+}
+
+interface UserDocument extends User, Document {
+    _id: Schema.Types.ObjectId;
+    
+}
+
+interface UserModel extends Model<UserDocument> { }
+
+const userSchema = new Schema<UserDocument>({
     name: {
         type: String,
         required: true
@@ -14,7 +35,7 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     todos: [{
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'Todo'
     }],
     tags: {
@@ -29,8 +50,22 @@ const userSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     }
+}, {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
 });
 
-const User = mongoose.model('User', userSchema);
+
+
+userSchema.methods.getCompletedTodos = async function (this: UserDocument) {
+    const todoDocs = await TodoModel.find({ _id: { $in: this.todos }, completed: true });
+    return todoDocs.length;
+};
+
+userSchema.methods.getNumber = function () {
+    return 20
+};
+
+const User = mongoose.model<UserDocument, UserModel>('User', userSchema);
 
 export default User;
