@@ -7,7 +7,6 @@ const refreshToken = async (req:Request, res:Response) => {
 
         const refreshToken = req.cookies.rt;
         if (!refreshToken) return res.sendStatus(401);
-        console.log
         jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET as string , (err:any, decoded:any) => {
             if (err) return res.sendStatus(403);
             //decoded= paylod kısmı

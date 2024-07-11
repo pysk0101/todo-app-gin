@@ -18,7 +18,7 @@ const authController = async (req:Request, res: Response) => {
 
     try {
         if (matchPwd) {
-            //email yerine userID koymayi dene.
+            //email yerine userID koymayi dene  .
             const token = jwt.sign({}, process.env.ACCESS_TOKEN_SECRET as string, { expiresIn: '15m' });
             const refreshToken = jwt.sign({}, process.env.REFRESH_TOKEN_SECRET as string, { expiresIn: '1d' });
 
@@ -38,8 +38,8 @@ const authController = async (req:Request, res: Response) => {
                 secure: true,
                 sameSite: 'none' 
             })
-            req.headers.userId = newUser._id.toString()
-            res.redirect(`/todo`);
+            
+            res.redirect(`/user/${newUser._id.toString()}`);
         } else {
             res.status(401).send("Hatalı şifre");
         }

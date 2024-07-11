@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Sayfası</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <!-- Custom CSS -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #f8f9fa, #e0e0e0);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        header h1 {
+            color: #333;
+        }
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-info img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+
+        .profile-info h2 {
+            margin: 0;
+            color: #007bff;
+        }
+
+        .profile-info p {
+            color: #555;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+
+        .stats .stat {
+            text-align: center;
+            flex: 1;
+        }
+
+        .stats .stat h3 {
+            margin: 0;
+            font-size: 2em;
+            color: #007bff;
+        }
+
+        .stats .stat p {
+            color: #555;
+        }
+
+        .tag-input {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .tag-input input {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .tag-input button {
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .tag-input button:hover {
+            background: #0056b3;
+        }
+
+        .tag-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .tag-list li {
+            background: #f8f9fa;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .tag-list .tag {
+            background: #007bff;
+            color: white;
+            border-radius: 3px;
+            padding: 5px 10px;
+            margin-left: 10px;
+        }
+
+        footer p {
+            color: #777;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header class="text-center py-5">
+            <h1 class="animate__animated animate__fadeInDown">Profil Sayfası</h1>
+        </header>
+        <main>
+            <div class="profile-info animate__animated animate__fadeInUp">
+                <img src="<%= user.profilePicture %>" alt="Profile Picture">
+                <h2>
+                    <%= user.name %>
+                </h2>
+                <p>
+                    <%= user.email %>
+                </p>
+            </div>
+
+            <div class="stats animate__animated animate__fadeInUp">
+                <div class="stat">
+                    <h3>
+                        <%= user.todos.length %>
+                    </h3>
+                    <p>Toplam Görev</p>
+                </div>
+                <div class="stat">
+                    <h3>
+                        <%= user.tags.length %>
+                    </h3>
+                    <p>Toplam Etiket</p>
+                </div>
+                <div class="stat">
+
+                    <h3>
+                        <%= completedCount %>
+                    </h3>
+                    <p>Tamamlanan Görevler</p>
+                </div>
+                <a href="/todo/<%= user._id.toString() %>" class="btn btn-primary animate__animated animate__fadeInUp"
+                    style="padding-top: 25px">Todolarımı Görüntüle</a>
+            </div>
+
+            <form action="/user/addTag" method="POST" class="tag-input animate__animated animate__fadeInUp">
+                <input type="text" id="newTag" name="newTag" placeholder="Yeni Etiket Ekle" required>
+                <input type="hidden" id="userId" name="userId" value="<%= user._id %>">
+                <button type="submit" class="btn btn-primary">Ekle</button>
+            </form>
+
+            <ul class="tag-list mt-4">
+                <% user.tags.forEach(tag=> { %>
+                    <li
+                        class="d-flex justify-content-between align-items-center p-3 mb-2 animate__animated animate__fadeIn">
+                        <span>
+                            <%= tag %>
+                        </span>
+                        <button class="btn btn-danger btn-sm" onclick="deleteTag('<%= tag %>')">Sil</button>
+                    </li>
+                    <% }) %>
+            </ul>
+        </main>
+        <footer class="text-center py-4">
+            <p>© 2024 Profil Sayfası</p>
+        </footer>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        async function deleteTag(tagName) {
+            try {
+                const response = await fetch('/user/deleteTag', {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ tagName })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Tag silinemedi');
+                }
+
+                const result = await response.json();
+                if (result.success && result.redirectUrl) {
+                    window.location.href = result.redirectUrl;
+                }
+            } catch (error) {
+                console.error('Bir hata oluştu:', error);
+            }
+        }
+
+    </script>
+</body>
+
+</html>
