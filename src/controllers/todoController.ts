@@ -4,7 +4,8 @@ import Todos from '../models/todoModel';
 import User from '../models/userModel'
 
 const getTodos = async (req: Request, res: Response) => {
-    const user = await User.findById("668b7be643d8ed14efb8a802")
+    const userId = req.params.userId;
+    const user = await User.findById(userId)
     if (!user) {
         return res.send("This user is invalid. Please add the user first.")
     }
@@ -35,11 +36,11 @@ const createTodo = async (req: Request, res: Response) => {
         })
         await todo.save();
 
-        user.todos.push(todo._id)
+        user.todos.push(todo._id as any)
         await user.save()
 
 
-        res.redirect('/todo')
+        res.redirect(`/todo/${user._id.toString()}`);
 
     } catch (error) {
         res.send(error)
