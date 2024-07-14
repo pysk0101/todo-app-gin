@@ -16,7 +16,7 @@ Features
 
 ``` sh
 # clone it
-git clone https://github.com/pysk0101/Blog-App.git
+git clone https://github.com/pysk0101/Todo-App.git
 cd Todo-App
 
 # Make it your own
