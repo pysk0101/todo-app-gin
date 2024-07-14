@@ -1,9 +1,11 @@
 import { Request, Response } from 'express';
 import User from '../models/userModel';
+import fs from 'fs';
+import path from 'path';
 
 const getUser = async (req: Request, res: Response) => {
     try {
-        
+
         const userId = req.params.userId;
         const user = await User.findById(userId)
         if (!user) {
@@ -12,7 +14,7 @@ const getUser = async (req: Request, res: Response) => {
 
         const completedCount = await user.getCompletedTodos();
 
-        res.render('profile', {user: user, completedCount: completedCount}, );
+        res.render('profile', { user: user, completedCount: completedCount },);
     } catch (error: any) {
         res.send(error)
     }
@@ -26,16 +28,16 @@ const createTag = async (req: Request, res: Response) => {
             return res.send("Kullanıcı bulunamadı");
         }
         const { newTag } = req.body;
-        if(user.tags.includes(newTag)) return res.send("Bu etiket zaten var");
+        if (user.tags.includes(newTag)) return res.send("Bu etiket zaten var");
 
         user.tags.push(newTag);
         await user.save();
 
-        res.redirect(`/user/${userId}`);    
-        
-    } catch (error:any) {
+        res.redirect(`/user/${userId}`);
+
+    } catch (error: any) {
         res.send(error)
-    }    
+    }
 }
 
 const deleteTag = async (req: Request, res: Response) => {
@@ -58,4 +60,70 @@ const deleteTag = async (req: Request, res: Response) => {
     }
 }
 
-export {  getUser , createTag , deleteTag}
+const updateProfilePicture = async (req: Request, res: Response) => {
+    try {
+        const userId = req.params.userId;
+        if (!req.file) {
+            return res.status(400).send('No file uploaded.');
+        }
+
+        const user = await User.findById(userId)
+        if (!user) {
+            return res.status(404).send('User not found');
+        }
+
+        if (typeof user.profilePicture === 'undefined') return res.status(404).send('User not found');
+
+        if (user.profilePicture !== "default-avatar.jpg") {
+            fs.unlink(path.join(__dirname, '../public/Images', user.profilePicture), (err) => {
+                if (err) {
+                    console.error(err);
+                }
+            });
+        }
+
+        user.profilePicture = req.file.filename
+        await user.save()
+
+        res.redirect('/user/' + userId)
+
+
+    } catch (error) {
+        res.status(500).send("Bir hata oluştu")
+    }
+}
+
+const removeProfilePicture = async (req: Request, res: Response) => {
+    try {
+        const userId = req.params.userId;
+        const user = await User.findById(userId)
+
+        if (!user) {
+            return res.status(404).send('User not found removePicture');
+        }
+
+        if (user.profilePicture === "default-avatar.jpg") return res.redirect('/user/' + userId)
+
+
+        if (user.profilePicture == undefined) return res.status(404).send('User not found removePicture');
+
+        if (user.profilePicture !== "default-avatar.jpg") {
+            fs.unlink(path.join(__dirname, '../public/Images', user.profilePicture), (err) => {
+                if (err) {
+                    console.error(err);
+                }
+            });
+        }
+
+        user.profilePicture = "default-avatar.jpg"
+
+        await user.save()
+
+        res.redirect('/user/' + userId)
+
+    } catch (error) {
+        res.send(error)
+    }
+}
+
+export { getUser, createTag, deleteTag, updateProfilePicture, removeProfilePicture }
