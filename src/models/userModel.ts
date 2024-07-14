@@ -10,6 +10,7 @@ interface User {
     createdAt: Date;
     updatedAt: Date;
     completedTodos?: number;
+    profilePicture?: string;
     getCompletedTodos(): Promise<number>;
     getNumber(): number;
 }
@@ -42,15 +43,12 @@ const userSchema = new Schema<UserDocument>({
         type: [String],
         default: ['Work', 'Personal', 'Study', 'School']
     },
-    createdAt: {
-        type: Date,
-        default: Date.now
-    },
-    updatedAt: {
-        type: Date,
-        default: Date.now
+    profilePicture: {
+        type: String,
+        default: "default-avatar.jpg"
     }
 }, {
+    timestamps: true,
     toJSON: { virtuals: true },
     toObject: { virtuals: true }
 });
