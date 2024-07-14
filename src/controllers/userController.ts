@@ -2,6 +2,9 @@ import { Request, Response } from 'express';
 import User from '../models/userModel';
 import fs from 'fs';
 import path from 'path';
+import bcrypt from "bcrypt";
+
+
 
 const getUser = async (req: Request, res: Response) => {
     try {
@@ -16,6 +19,26 @@ const getUser = async (req: Request, res: Response) => {
 
         res.render('profile', { user: user, completedCount: completedCount },);
     } catch (error: any) {
+        res.send(error)
+    }
+}
+
+const deleteUser = async (req: Request, res: Response) => {
+    try {
+        const password = req.body.password; 
+        const userId = req.params.userId;
+        const user = await User.findById(userId);
+        if(!user) return res.send("Kullanıcı bulunamadı");
+
+        const isMatch = await bcrypt.compare(password, user.password);
+
+        if (!isMatch) {
+            return res.send("Şifre hatalı");
+        }
+        
+        await User.deleteOne({ _id: userId }).then(() => { res.redirect("/"); });
+
+    } catch (error) {
         res.send(error)
     }
 }
@@ -126,4 +149,4 @@ const removeProfilePicture = async (req: Request, res: Response) => {
     }
 }
 
-export { getUser, createTag, deleteTag, updateProfilePicture, removeProfilePicture }
+export { getUser, deleteUser, createTag, deleteTag, updateProfilePicture, removeProfilePicture }
