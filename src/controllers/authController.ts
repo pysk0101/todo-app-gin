@@ -49,4 +49,12 @@ const authController = async (req:Request, res: Response) => {
     }
 }
 
-export default authController 
+
+const logoutController = async (req: Request, res: Response) => {
+    res.clearCookie('userId');
+    res.clearCookie('at');
+    res.clearCookie('rt');
+    res.redirect('/');
+}
+
+export {authController,logoutController} 
