@@ -140,19 +140,28 @@
 </head>
 
 <body>
+
     <div class="container">
         <header class="text-center py-5">
             <h1 class="animate__animated animate__fadeInDown">Profil Sayfası</h1>
         </header>
+
         <main>
             <div class="profile-info animate__animated animate__fadeInUp">
-                <img src="<%= user.profilePicture %>" alt="Profile Picture">
+                <form id="profile-form" action="/user/<%= user._id.toString() %>" method="post"
+                    enctype="multipart/form-data">
+
+                    <input type="file" name="profilePicture" id="avatar-input">
+                    <button type="submit">Upload</button>
+                </form>
+                <img src="/Images/<%= user.profilePicture %>" alt="Profile Picture">
                 <h2>
                     <%= user.name %>
                 </h2>
                 <p>
                     <%= user.email %>
                 </p>
+
             </div>
 
             <div class="stats animate__animated animate__fadeInUp">
@@ -197,9 +206,25 @@
                     <% }) %>
             </ul>
         </main>
-        <footer class="text-center py-4">
+
+        <footer class="text-align py-4 d-flex justify-content-between align-items-center">
             <p>© 2024 Profil Sayfası</p>
+
+            <div class="text-align py-4 d-flex justify-content-between align-items-center">
+                <div class="logout-btn-container">
+                    <form action="/user/<%= user._id.toString() %>/removePicture" method="POST">
+                        <button type="submit" class="btn btn-primary">Remove Picture</button>
+                    </form>
+                </div>
+
+                <div class="logout-btn-container">
+                    <form action="/auth/logout" method="POST">
+                        <button type="submit" class="btn btn-danger">Çıkış Yap</button>
+                    </form>
+                </div>
+            </div>
         </footer>
+
     </div>
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

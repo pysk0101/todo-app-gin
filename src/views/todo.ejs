@@ -155,12 +155,54 @@
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	<script>
-		function completeTodo(todoId) {
-			// Complete todo logic here
+		async function completeTodo(todoId) {
+			try {
+				const response = await fetch('/todo/complete', {
+					method: 'PUT',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({
+						todoId
+					})
+				});
+
+				if (!response.ok) {
+                    throw new Error('Todo tamamlanamadı');
+                }
+
+                const result = await response.json();
+                if (result.success && result.redirectUrl) {
+                    window.location.href = result.redirectUrl;
+                }
+			} catch (error) {
+				console.error('Bir hata oluştu:', error);
+			}
 		}
 
-		function deleteTodo(todoId) {
-			// Delete todo logic here
+		async function deleteTodo(todoId) {
+			try {
+				const response = await fetch('/todo/delete', {
+					method: 'DELETE',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({
+						todoId
+					})
+				});
+
+				if (!response.ok) {
+					throw new Error('Todo silinemedi');
+				}
+
+				const result = await response.json();
+				if (result.success && result.redirectUrl) {
+					window.location.href = result.redirectUrl;
+				}
+			} catch (error) {
+				console.error('Bir hata oluştu:', error);
+			}
 		}
 	</script>
 </body>
