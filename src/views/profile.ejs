@@ -143,7 +143,7 @@
 
     <div class="container">
         <header class="text-center py-5">
-            <h1 class="animate__animated animate__fadeInDown">Profil Sayfası</h1>
+            <h1 class="animate__animated animate__fadeInDown">Profil Page</h1>
         </header>
 
         <main>
@@ -169,29 +169,29 @@
                     <h3>
                         <%= user.todos.length %>
                     </h3>
-                    <p>Toplam Görev</p>
+                    <p>Total Todos</p>
                 </div>
                 <div class="stat">
                     <h3>
                         <%= user.tags.length %>
                     </h3>
-                    <p>Toplam Etiket</p>
+                    <p>Total Tag</p>
                 </div>
                 <div class="stat">
 
                     <h3>
                         <%= completedCount %>
                     </h3>
-                    <p>Tamamlanan Görevler</p>
+                    <p>Completed Todos</p>
                 </div>
                 <a href="/todo/<%= user._id.toString() %>" class="btn btn-primary animate__animated animate__fadeInUp"
-                    style="padding-top: 25px">Todolarımı Görüntüle</a>
+                    style="padding-top: 25px">Show My Todos</a>
             </div>
 
             <form action="/user/addTag" method="POST" class="tag-input animate__animated animate__fadeInUp">
-                <input type="text" id="newTag" name="newTag" placeholder="Yeni Etiket Ekle" required>
+                <input type="text" id="newTag" name="newTag" placeholder="Add New Tag" required>
                 <input type="hidden" id="userId" name="userId" value="<%= user._id %>">
-                <button type="submit" class="btn btn-primary">Ekle</button>
+                <button type="submit" class="btn btn-primary">Add</button>
             </form>
 
             <ul class="tag-list mt-4">
@@ -201,14 +201,14 @@
                         <span>
                             <%= tag %>
                         </span>
-                        <button class="btn btn-danger btn-sm" onclick="deleteTag('<%= tag %>')">Sil</button>
+                        <button class="btn btn-danger btn-sm" onclick="deleteTag('<%= tag %>')">Delete</button>
                     </li>
                     <% }) %>
             </ul>
         </main>
 
         <footer class="text-align py-4 d-flex justify-content-between align-items-center">
-            <p>© 2024 Profil Sayfası</p>
+            <p>© 2024 Profil Page</p>
 
             <div class="text-align py-4 d-flex justify-content-between align-items-center">
                 <div class="logout-btn-container">
@@ -219,7 +219,7 @@
 
                 <div class="logout-btn-container">
                     <form action="/auth/logout" method="POST">
-                        <button type="submit" class="btn btn-danger">Çıkış Yap</button>
+                        <button type="submit" class="btn btn-danger">Logout</button>
                     </form>
                 </div>
             </div>

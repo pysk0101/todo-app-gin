@@ -107,10 +107,10 @@
 		</header>
 		<main>
 			<form action="/todo/add" method="POST" class="todo-input animate__animated animate__fadeInUp">
-				<input type="text" id="todo" name="content" placeholder="Yeni Görev Ekle" required>
+				<input type="text" id="todo" name="content" placeholder="Add New Todo" required>
 				<input type="hidden" id="userId" name="userId" value="<%= user._id %>">
 				<select name="tag" id="tag" required>
-					<option value="" disabled selected>Etiket Seçiniz</option>
+					<option value="" disabled selected>Select A Tag</option>
 					<% user.tags.forEach(function(tag) { %>
 						<option value="<%= tag %>">
 							<%= tag %>
@@ -145,8 +145,8 @@
 		
 			
 			<footer class="text-center py-4">
-				<a href="/user/<%= user._id.toString() %>" class="btn btn-primary animate__animated animate__fadeInUp">Profilimi Görüntüle</a>
-				<p>© 2024 Todolist Uygulaması</p>
+				<a href="/user/<%= user._id.toString() %>" class="btn btn-primary animate__animated animate__fadeInUp">Show My Profile</a>
+				<p>© 2024 Todo Application</p>
 			</footer>
 		
 	</div>
