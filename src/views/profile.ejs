@@ -1,300 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profil Sayfası</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- Animate.css -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <!-- Custom CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Roboto', sans-serif;
-            background: linear-gradient(135deg, #f8f9fa, #e0e0e0);
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1a202c, #2d3748);
+            color: #e2e8f0;
         }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background: white;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        header h1 {
-            color: #333;
-        }
-
-        .profile-info {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .profile-info img {
-            border-radius: 50%;
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-            margin-bottom: 20px;
-        }
-
-        .profile-info h2 {
-            margin: 0;
-            color: #007bff;
-        }
-
-        .profile-info p {
-            color: #555;
-        }
-
-        .stats {
-            display: flex;
-            justify-content: space-around;
-            margin-bottom: 20px;
-        }
-
-        .stats .stat {
-            text-align: center;
-            flex: 1;
-        }
-
-        .stats .stat h3 {
-            margin: 0;
-            font-size: 2em;
-            color: #007bff;
-        }
-
-        .stats .stat p {
-            color: #555;
-        }
-
-        .tag-input {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-
-        .tag-input input {
-            flex: 1;
-            padding: 10px;
-            border: 2px solid #ddd;
-            border-radius: 5px;
-            margin-right: 10px;
-        }
-
-        .tag-input button {
-            padding: 10px 20px;
-            background: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .tag-input button:hover {
-            background: #0056b3;
-        }
-
-        .tag-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .tag-list li {
-            background: #f8f9fa;
-            padding: 15px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .tag-list .tag {
-            background: #007bff;
-            color: white;
-            border-radius: 3px;
-            padding: 5px 10px;
-            margin-left: 10px;
-        }
-
-        footer p {
-            color: #777;
-            margin-top: 20px;
-        }
-
-        .popup {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.4);
-        }
-
-        .popup-content {
-            background-color: #fefefe;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 30%;
-        }
-
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
+        .profile-picture-container:hover .overlay {
+            opacity: 1;
         }
     </style>
 </head>
-
-<body>
-
-    <div class="container">
-        <header class="text-center py-5">
-            <h1 class="animate__animated animate__fadeInDown">Profil Page</h1>
+<body class="min-h-screen flex items-center justify-center">
+    <div class="container mx-auto p-8 bg-gray-800 rounded-lg shadow-xl max-w-4xl">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-blue-400">Profil Sayfası</h1>
         </header>
-
-        <main>
-            <div class="profile-info animate__animated animate__fadeInUp">
-                <form id="profile-form" action="/user/<%= user._id.toString() %>" method="post"
-                    enctype="multipart/form-data">
-
-                    <input type="file" name="profilePicture" id="avatar-input">
-                    <button type="submit">Upload</button>
+        
+        <main class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="md:col-span-1">
+                <div class="profile-picture-container relative w-48 h-48 mx-auto mb-4 rounded-full overflow-hidden">
+                    <img src="/Images/<%= user.profilePicture %>" alt="Profile Picture" class="w-full h-full object-cover">
+                    <div class="overlay absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 transition-opacity duration-300">
+                        <label for="avatar-input" class="cursor-pointer text-white">
+                            <i class="fas fa-camera text-3xl"></i>
+                        </label>
+                    </div>
+                </div>
+                <form id="profile-form" action="/user/<%= user._id.toString() %>" method="post" enctype="multipart/form-data" class="hidden">
+                    <input type="file" name="profilePicture" id="avatar-input" class="hidden" onchange="this.form.submit()">
                 </form>
-                <img src="/Images/<%= user.profilePicture %>" alt="Profile Picture">
-                <h2>
-                    <%= user.name %>
-                </h2>
-                <p>
-                    <%= user.email %>
-                </p>
-
+                <h2 class="text-2xl font-semibold text-center text-blue-300 mb-2"><%= user.name %></h2>
+                <p class="text-center text-gray-400 mb-4"><%= user.email %></p>
+                <div class="flex justify-center space-x-2">
+                    <form action="/user/<%= user._id.toString() %>/removePicture" method="POST">
+                        <button type="submit" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded transition duration-300">Remove Picture</button>
+                    </form>
+                    <form action="/user/" method="POST">
+                        <button type="submit" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded transition duration-300">Logout</button>
+                    </form>
+                </div>
             </div>
 
-            <div class="stats animate__animated animate__fadeInUp">
-                <div class="stat">
-                    <h3>
-                        <%= user.todos.length %>
-                    </h3>
-                    <p>Total Todos</p>
+            <div class="md:col-span-2">
+                <div class="grid grid-cols-3 gap-4 mb-8">
+                    <div class="bg-gray-700 p-4 rounded-lg text-center">
+                        <h3 class="text-3xl font-bold text-blue-400"><%= user.todos.length %></h3>
+                        <p class="text-gray-400">Total Todos</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg text-center">
+                        <h3 class="text-3xl font-bold text-blue-400"><%= user.tags.length %></h3>
+                        <p class="text-gray-400">Total Tags</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg text-center">
+                        <h3 class="text-3xl font-bold text-blue-400"><%= completedCount %></h3>
+                        <p class="text-gray-400">Completed Todos</p>
+                    </div>
                 </div>
-                <div class="stat">
-                    <h3>
-                        <%= user.tags.length %>
-                    </h3>
-                    <p>Total Tag</p>
-                </div>
-                <div class="stat">
+                
+                <a href="/todo/<%= user._id.toString() %>" class="block w-full bg-blue-500 hover:bg-blue-600 text-white text-center py-3 rounded-lg mb-8 transition duration-300">Show My Todos</a>
+                
+                <form action="/user/addTag" method="POST" class="mb-6">
+                    <div class="flex">
+                        <input type="text" id="newTag" name="newTag" placeholder="Add New Tag" required class="flex-grow bg-gray-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <input type="hidden" id="userId" name="userId" value="<%= user._id %>">
+                        <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-r-lg transition duration-300">Add</button>
+                    </div>
+                </form>
 
-                    <h3>
-                        <%= completedCount %>
-                    </h3>
-                    <p>Completed Todos</p>
-                </div>
-                <a href="/todo/<%= user._id.toString() %>" class="btn btn-primary animate__animated animate__fadeInUp"
-                    style="padding-top: 25px">Show My Todos</a>
-            </div>
-
-            <form action="/user/addTag" method="POST" class="tag-input animate__animated animate__fadeInUp">
-                <input type="text" id="newTag" name="newTag" placeholder="Add New Tag" required>
-                <input type="hidden" id="userId" name="userId" value="<%= user._id %>">
-                <button type="submit" class="btn btn-primary">Add</button>
-            </form>
-
-            <ul class="tag-list mt-4">
-                <% user.tags.forEach(tag=> { %>
-                    <li
-                        class="d-flex justify-content-between align-items-center p-3 mb-2 animate__animated animate__fadeIn">
-                        <span>
-                            <%= tag %>
-                        </span>
-                        <button class="btn btn-danger btn-sm" onclick="deleteTag('<%= tag %>')">Delete</button>
-                    </li>
+                <ul class="space-y-2">
+                    <% user.tags.forEach(tag => { %>
+                        <li class="flex justify-between items-center bg-gray-700 p-3 rounded-lg">
+                            <span class="text-blue-300"><%= tag %></span>
+                            <button onclick="deleteTag('<%= tag %>')" class="text-red-400 hover:text-red-500 transition duration-300">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </li>
                     <% }) %>
-            </ul>
+                </ul>
+            </div>
         </main>
 
-        <footer class="text-align py-4 d-flex justify-content-between align-items-center">
-            <p>© 2024 Profil Page</p>
-
-            <div class="text-align py-4 d-flex justify-content-between align-items-center">
-                <div class="logout-btn-container">
-                    <form action="/user/<%= user._id.toString() %>/removePicture" method="POST">
-                        <button type="submit" class="btn btn-primary">Remove Picture</button>
-                    </form>
-                </div>
-
-
-                <div class="logout-btn-container">
-                    <form action="/user/" method="POST">
-                        <button type="submit" class="btn btn-danger">Logout</button>
-                    </form>
-                </div>
-
-                <div class="logout-btn-container">
-                    <button type="button" class="btn btn-danger" onclick="showDeletePopup()">Delete</button>
-                </div>
-            </div>
+        <img src="src/public/Images/1720975673670.jpg" alt="">
+        <footer class="mt-8 text-center text-gray-500">
+            <p>© 2024 Profil Sayfası</p>
         </footer>
-
     </div>
-    <div id="deletePopup" class="popup">
-        <div class="popup-content">
-            <span class="close" onclick="closeDeletePopup()">&times;</span>
-            <h2>Confirm Deletion</h2>
+
+    <!-- Delete Account Modal -->
+    <div id="deletePopup" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center">
+        <div class="bg-gray-800 p-8 rounded-lg max-w-md w-full">
+            <h2 class="text-2xl font-bold mb-4 text-red-400">Hesabı Sil</h2>
             <form id="deleteForm" action="/user/<%= user._id.toString()%>/deleteUser" method="POST">
-                <label for="password">Enter your password:</label>
-                <input type="password" id="password" name="password" required>
-                <button type="submit" class="btn btn-danger">Confirm</button>
+                <div class="mb-4">
+                    <label for="password" class="block text-gray-400 mb-2">Şifrenizi girin:</label>
+                    <input type="password" id="password" name="password" required class="w-full bg-gray-700 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-red-500">
+                </div>
+                <div class="flex justify-end space-x-4">
+                    <button type="button" onclick="closeDeletePopup()" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded transition duration-300">İptal</button>
+                    <button type="submit" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded transition duration-300">Hesabı Sil</button>
+                </div>
             </form>
         </div>
     </div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
         async function deleteTag(tagName) {
             try {
                 const response = await fetch('/user/deleteTag', {
                     method: 'DELETE',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ tagName })
                 });
 
-                if (!response.ok) {
-                    throw new Error('Tag silinemedi');
-                }
+                if (!response.ok) throw new Error('Tag silinemedi');
 
                 const result = await response.json();
                 if (result.success && result.redirectUrl) {
@@ -306,13 +132,16 @@
         }
 
         function showDeletePopup() {
-            document.getElementById("deletePopup").style.display = "block";
+            document.getElementById("deletePopup").style.display = "flex";
         }
 
         function closeDeletePopup() {
             document.getElementById("deletePopup").style.display = "none";
         }
+
+        document.querySelector('.profile-picture-container').addEventListener('click', function() {
+            document.getElementById('avatar-input').click();
+        });
     </script>
 </body>
-
 </html>
