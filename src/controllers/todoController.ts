@@ -9,7 +9,10 @@ const getTodos = async (req: Request, res: Response) => {
     if (!user) {
         return res.send("This user is invalid. Please add the user first.")
     }
-    const todos = await Todos.find({ userId: user._id });
+    
+    const populatedUser = await user.populate('todos');
+    
+    const todos = populatedUser.todos
     res.render('todo', {
         todos: todos,
         user: user
