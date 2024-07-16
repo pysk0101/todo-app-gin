@@ -3,12 +3,13 @@ import express from 'express';
 import dotenv from 'dotenv';
 import connectDB from './config/database-connection';
 import cookieParser from 'cookie-parser';
-
+import path from 'path';
 
 dotenv.config();
 const app = express();
 
 //Middlewares
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: false }));
 app.set('view engine', 'ejs');
 app.use(express.json())
@@ -26,7 +27,7 @@ import pageRouter from './routes/pageRouter';
 
 //APIs
 app.use('/signup', registerRouter);
-app.use('/login', authRouter);
+app.use('/auth', authRouter);
 app.use('/todo', todoRouter);
 app.use('/user', userRouter);
 app.use("/", pageRouter)

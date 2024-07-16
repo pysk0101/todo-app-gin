@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
 const authController = async (req:Request, res: Response) => {
-
+    try {
     const { email, password } = req.body;
     if (!email || !password) return res.status(400).send("Tüm alanları doldurunuz");
 
@@ -16,7 +16,7 @@ const authController = async (req:Request, res: Response) => {
 
     if (!matchPwd) return res.status(400).send("Hatalı şifre");
 
-    try {
+    
         if (matchPwd) {
             //email yerine userID koymayi dene  .
             const token = jwt.sign({}, process.env.ACCESS_TOKEN_SECRET as string, { expiresIn: '15m' });
