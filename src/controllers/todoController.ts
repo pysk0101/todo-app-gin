@@ -21,6 +21,7 @@ const getTodos = async (req: Request, res: Response) => {
 
 const createTodo = async (req: Request, res: Response) => {
     try {
+        console.log(req.body)
         const { userId, tag, content } = req.body;
         const user = await User.findById(req.body.userId)
         if (!user) {
@@ -38,7 +39,8 @@ const createTodo = async (req: Request, res: Response) => {
             content
         })
         await todo.save();
-
+        console.log(todo._id)
+        
         user.todos.push(todo._id as any)
         await user.save()
 
