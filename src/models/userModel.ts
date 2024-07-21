@@ -1,5 +1,6 @@
 import mongoose, { Schema, Document, Model } from "mongoose";
 import TodoModel from "./todoModel";
+import mongoosePaginate from 'mongoose-paginate-v2';
 
 interface User {
     name: string;
@@ -20,7 +21,7 @@ interface UserDocument extends User, Document {
     
 }
 
-interface UserModel extends Model<UserDocument> { }
+interface UserModel extends Model<UserDocument>  { }
 
 const userSchema = new Schema<UserDocument>({
     name: {
@@ -63,6 +64,8 @@ userSchema.methods.getCompletedTodos = async function (this: UserDocument) {
 userSchema.methods.getNumber = function () {
     return 20
 };
+
+userSchema.plugin(mongoosePaginate as any);
 
 const User = mongoose.model<UserDocument, UserModel>('User', userSchema);
 
