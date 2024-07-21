@@ -1,4 +1,6 @@
-import { Schema, model, Document } from 'mongoose';
+import mongoose, { Schema, Model, Document } from 'mongoose';
+
+import mongoosePaginate from 'mongoose-paginate-v2';
 
 // Todo belgesinin alanlarını tanımlayan interface
 interface Todo {
@@ -12,6 +14,8 @@ interface Todo {
 interface TodoDocument extends Todo, Document {
     _id: Schema.Types.ObjectId;
 }
+
+interface TodoModel extends Model<TodoDocument>, mongoose.PaginateModel<TodoDocument> { }
 
 // Todo şemasını oluşturma
 const TodoSchema: Schema<TodoDocument> = new Schema({
@@ -34,7 +38,9 @@ const TodoSchema: Schema<TodoDocument> = new Schema({
     }
 });
 
+TodoSchema.plugin(mongoosePaginate as any);
+
 // Todo modelini oluşturma
-const TodoModel = model<TodoDocument>('Todo', TodoSchema);
+const TodoModel = mongoose.model<TodoDocument,TodoModel>('Todo', TodoSchema);
 
 export default TodoModel;
