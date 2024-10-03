@@ -4,5 +4,5 @@ import "./App.css";
 function App() {
   return <div className="App"></div>;
 }
-comperntes;
+
 export default App;
