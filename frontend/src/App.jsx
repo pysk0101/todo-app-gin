@@ -10,7 +10,7 @@ function App() {
     <div className="App">
       <div className={` min-h-[100svh] flex flex-col justify-between bg-main `}>
         <Header />
-        <div className={"mt-16 p-2 h-full "}>
+        <div className={"mt-14 p-2 h-full "}>
           <AddTask />
           <List />
         </div>

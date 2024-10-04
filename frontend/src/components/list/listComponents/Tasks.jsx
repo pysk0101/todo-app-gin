@@ -3,10 +3,13 @@ import Task from "./Task";
 
 export default function Tasks() {
   return (
-    <div className={`p-2`}>
+    <div className={`h-1/2  `}>
       <NamedLine content={"tasks"} />
-      <div>
-        <Task />
+      <div className={`flex flex-col py-2 gap-2 overflow-hidden`}>
+        <Task content={"test"} />
+        <Task content={"test"} />
+        <Task content={"test"} />
+        <Task content={"test"} />
       </div>
     </div>
   );
