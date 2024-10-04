@@ -4,7 +4,7 @@ import Tasks from "./listComponents/Tasks";
 
 export default function List() {
   return (
-    <div className={`flex flex-col h-[80svh] `}>
+    <div className={`flex flex-col h-[80svh] gap-7`}>
       <Tasks />
       <Completed />
     </div>

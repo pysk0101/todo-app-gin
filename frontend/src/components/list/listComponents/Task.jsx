@@ -3,7 +3,7 @@ import Button from "../../Button";
 export default function Task({ content }) {
   return (
     <div
-      className={`flex p-3 rounded-3xl border-2 border-primary30 bg-secondary`}
+      className={`flex p-3 rounded-3xl border-2 border-primary30 bg-secondary shadow-sm hover:opacity-70`}
     >
       <p className={`text-xs text-text  `}>{content}</p>
       <div className={`flex`}>
