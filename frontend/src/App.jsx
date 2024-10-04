@@ -6,10 +6,12 @@ import Footer from "./components/footer";
 
 function App() {
   return (
-    <div className="App ">
-      <Header />
-      <List />
-      <Footer />
+    <div className="App">
+      <div className={` min-h-[100svh] flex flex-col bg-main `}>
+        <Header />
+        <List />
+        <Footer />
+      </div>
     </div>
   );
 }
