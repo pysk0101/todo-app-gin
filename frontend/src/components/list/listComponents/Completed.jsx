@@ -1,3 +1,13 @@
+import NamedLine from "./NamedLine";
+import Task from "./Task";
+
 export default function Completed() {
-  return <div>Completed tasks go here...</div>;
+  return (
+    <div className={`p-2`}>
+      <NamedLine content={"Completed"} />
+      <div>
+        <Task />
+      </div>
+    </div>
+  );
 }

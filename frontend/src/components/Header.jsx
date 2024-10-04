@@ -3,7 +3,7 @@ import Button from "./Button";
 export default function Header() {
   return (
     <header
-      className={`fixed flex w-full p-2 justify-between items-center bg-secondary text-primary `}
+      className={`fixed flex w-full p-2 justify-between items-center bg-secondary text-primary z-50`}
     >
       <h1 className={`text-3xl font-bold leading-none `}>TODO</h1>
 
