@@ -17,7 +17,7 @@ function App() {
         } `}
       >
         <Header />
-        <div className={"mt-14 p-2 h-full"}>
+        <div className={"mt-16 p-2 h-full lg:px-5"}>
           <AddTask />
           <List />
         </div>
