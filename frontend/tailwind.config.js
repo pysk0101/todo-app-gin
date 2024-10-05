@@ -8,12 +8,17 @@ module.exports = {
       primary50: "#00337C50",
       primary30: "#00337C30",
       primary10: "#00337C10",
-
       secondary: "#FFFFFF",
-
       main: "#F0F2F5",
-
       text: "#050505",
+      // dark
+      darkPrimary: "#88FFE4",
+      darkPrimary50: "#88FFE450",
+      darkPrimary30: "#88FFE430",
+      darkPrimary10: "#88FFE410",
+      darkSecondary: "#1F2933     ",
+      darkMain: "#121B22",
+      darkText: "#C5CACE",
     },
   },
   darkMode: "class",

@@ -10,11 +10,9 @@ function App() {
   const { darkMode } = useDarkMode();
 
   return (
-    <div className="App">
+    <div className={` App ${darkMode ? "dark" : ""} `}>
       <div
-        className={` min-h-[100svh] flex flex-col justify-between bg-main ${
-          darkMode ? "dark" : ""
-        } `}
+        className={` min-h-[100svh] flex flex-col justify-between bg-main  dark:bg-darkMain `}
       >
         <Header />
         <div className={"mt-16 p-2 h-full lg:px-5"}>
