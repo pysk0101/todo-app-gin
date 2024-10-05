@@ -1,12 +1,19 @@
 import NamedLine from "./NamedLine";
 import Task from "./Task";
+import useVisible from "../../../store/visibleStore";
 
 export default function Tasks({ title }) {
+  const { isVisible, isCVisible } = useVisible();
+
+  const isItVisible = title === "Tasks" ? isVisible : isCVisible;
+
   return (
     <div className={`h-1/2 xl:w-1/2 xl:h-full`}>
-      <NamedLine content={title} />
+      <NamedLine title={title} />
       <div
-        className={`list_1 flex flex-col py-2 gap-2 2xl:gap-4 h-full overflow-scroll`}
+        className={`list_1 flex flex-col py-2 gap-2 2xl:gap-4 h-full overflow-scroll ${
+          !isItVisible ? "" : "hidden"
+        } `}
       >
         <Task content={"test"} />
         <Task
