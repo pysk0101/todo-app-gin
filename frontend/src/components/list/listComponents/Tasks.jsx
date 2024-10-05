@@ -3,7 +3,7 @@ import Task from "./Task";
 
 export default function Tasks() {
   return (
-    <div className={`h-1/2 `}>
+    <div className={`h-1/2 xl:w-1/2 xl:h-full`}>
       <NamedLine content={"tasks "} />
       <div className={`list_1 flex flex-col py-2 gap-2 h-full overflow-scroll`}>
         <Task content={"test"} />

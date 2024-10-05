@@ -1,7 +1,7 @@
 import Button from "../../Button";
 export default function AddTask() {
   return (
-    <div className={`w-full relative  `}>
+    <div className={`w-full relative xl:w-[49%]  `}>
       <input
         className={`w-full p-2 rounded-full pl-4 pr-12 border-2 border-primary30 focus:outline-none`}
         type="text"
