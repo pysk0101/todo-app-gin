@@ -12,7 +12,7 @@ export default function Header() {
 
       <Button
         icon={`material-symbols-light:${darkMode ? "light-mode" : "dark-mode"}`}
-        extraClasses={"text-4xl  bg-main dark:bg-darkMain dark:bg-darkMain "}
+        extraClasses={"text-3xl p-1 bg-main dark:bg-darkMain dark:bg-darkMain "}
         func={toggleDarkMode}
       />
     </header>
