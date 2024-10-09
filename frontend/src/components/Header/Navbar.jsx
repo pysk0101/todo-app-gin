@@ -1,10 +1,12 @@
 import { MdDarkMode } from "react-icons/md";
+import { MdLightMode } from "react-icons/md";
 import {
   Disclosure,
   DisclosureButton,
   DisclosurePanel,
 } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import useDarkModeStore from "../../Store/darkMode";
 
 const navigation = [
   { name: "Home", href: "#", current: true },
@@ -17,6 +19,8 @@ function classNames(...classes) {
 }
 
 export default function Navbar() {
+  const { isDark, toggleDarkMode } = useDarkModeStore();
+
   return (
     <Disclosure as="nav" className="bg-secondary dark:bg-darkSecondary">
       <div className="max-w-full px-2 mx-auto sm:px-6 lg:px-8">
@@ -64,9 +68,14 @@ export default function Navbar() {
             <button
               type="button"
               className="relative p-1 transition rounded-full text-primary dark:text-darkPrimary bg-main dark:bg-darkMain hover:opacity-75 hover:scale-105"
+              onClick={toggleDarkMode}
             >
               <span className="absolute -inset-1.5" />
-              <MdDarkMode aria-hidden="true" className="w-8 h-8" />
+              {isDark ? (
+                <MdLightMode aria-hidden="true" className="w-8 h-8" />
+              ) : (
+                <MdDarkMode aria-hidden="true" className="w-8 h-8" />
+              )}
             </button>
           </div>
         </div>
