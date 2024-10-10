@@ -6,7 +6,7 @@ import (
 )
 
 func SetupRoutes(r *gin.Engine, todoHandler *todos.TodoHandler) {
-	todoGroup := r.Group("/api/todos")
+	todoGroup := r.Group("/todos")
 	{
 		todoGroup.GET("", todoHandler.FindAll)       // /todos
 		todoGroup.POST("", todoHandler.Create)       // /todos
