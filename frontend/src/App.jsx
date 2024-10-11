@@ -7,10 +7,12 @@ import useDarkModeStore from "./Store/darkMode";
 function App() {
   const { isDark } = useDarkModeStore();
   return (
-    <div className={`App bg-main min-h-[100svh] ${isDark ? "dark" : ""} `}>
-      <Header />
-      <Lists />
-      <Footer />
+    <div className={`App  ${isDark ? "dark" : ""} `}>
+      <div className="bg-main dark:bg-darkMain min-h-[100svh]">
+        <Header />
+        <Lists />
+        <Footer />
+      </div>
     </div>
   );
 }
