@@ -22,7 +22,7 @@ export default function Header() {
   const { isDark, toggleDarkMode } = useDarkModeStore();
 
   return (
-    <header className={" absolute top-0 w-full z-50"}>
+    <header className={" fixed top-0 w-full z-50"}>
       <Disclosure as="nav" className="bg-secondary dark:bg-darkSecondary">
         <div className="max-w-full px-2 mx-auto sm:px-6 lg:px-8">
           <div className="relative flex items-center justify-between h-16">

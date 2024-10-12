@@ -8,10 +8,14 @@ import useDarkModeStore from "./Store/darkMode";
 function App() {
   const { isDark } = useDarkModeStore();
   return (
-    <div className={`App  ${isDark ? "dark" : ""}  `}>
-      <div className="bg-main dark:bg-darkMain marker:m-h-[100svh] ">
+    <div className={`${isDark ? "dark" : ""}`}>
+      <div className="App bg-main dark:bg-darkMain ">
         <Header />
-        <div className={"mt-16 p-2  lg:px-5"}>
+        <div
+          className={
+            "pt-24 p-2  lg:px-5 min-h-[97.4svh] min-[2000px]:min-h-[100svh]"
+          }
+        >
           <AddTask />
           <List />
         </div>
