@@ -9,7 +9,7 @@ export default function Tasks({ title }) {
 
   return (
     <div className={`h-1/2 xl:w-1/2 xl:h-full`}>
-      <NamedLine title={title} />
+      <NamedLine title={title} length={tasks.length} />
       <div
         className={`list_1 flex flex-col py-2 gap-2 2xl:gap-4 h-full overflow-scroll ${
           !isVisible ? "" : "hidden"
@@ -18,7 +18,8 @@ export default function Tasks({ title }) {
         {tasks.map((task) => (
           <Task
             key={task.id}
-            content={task.title}
+            id={task.id}
+            title={task.title}
             date={task.date}
             isCompleted={task.isCompleted}
           />

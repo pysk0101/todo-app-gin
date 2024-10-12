@@ -1,7 +1,7 @@
 import Button from "../../Button";
 import useVisible from "../../../Store/visibleStore";
 
-export default function NamedLine({ title }) {
+export default function NamedLine({ title, length }) {
   const { isVisible, toggleIsVisible, isCVisible, toggleIsCVisible } =
     useVisible();
 
@@ -18,7 +18,7 @@ export default function NamedLine({ title }) {
           func={isItTasks ? toggleIsVisible : toggleIsCVisible}
         />
         <h3 className="font-medium 2xl:text-lg">{title}</h3>
-        <h3 className="font-semibold 2xl:text-lg ">6</h3>
+        <h3 className="font-semibold 2xl:text-lg ">{length}</h3>
       </div>
 
       <hr className={`text-primary dark:text-darkPrimary50`} />

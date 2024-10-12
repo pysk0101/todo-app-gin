@@ -3,10 +3,16 @@ import { create } from "zustand";
 const useTasksStore = create((set) => ({
   tasks: [
     { id: 1, title: "Task 1", completed: false, date: "2002-02-20" },
-    { id: 2, title: "Task 2", completed: true, date: "2002-02-20" },
+    { id: 2, title: "Task 2", completed: false, date: "2002-02-20" },
     { id: 3, title: "Task 3", completed: false, date: "2002-02-20" },
   ],
-  idCounter: 4, // Start after the last initial task's ID
+
+  completedTasks: [
+    { id: 4, title: "Task 2", completed: true, date: "2002-02-20" },
+    { id: 5, title: "Task 3", completed: true, date: "2002-02-20" },
+    { id: 6, title: "Task 3", completed: true, date: "2002-02-20" },
+  ],
+  idCounter: 7,
 
   addTask: (title) =>
     set((state) => {
