@@ -9,9 +9,9 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import useDarkModeStore from "../../Store/darkMode";
 
 const navigation = [
-  { name: "Home", href: "#", current: true },
-  { name: "Dashboard", href: "#", current: false },
-  { name: "Login", href: "#", current: false },
+  { name: "Home", href: "/", current: true },
+  { name: "Dashboard", href: "/Dashboard", current: false },
+  { name: "Login", href: "/Login", current: false },
 ];
 
 function classNames(...classes) {

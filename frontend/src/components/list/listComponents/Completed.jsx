@@ -1,11 +1,10 @@
 import NamedLine from "./NamedLine";
 import Task from "./Task";
 import useVisible from "../../../Store/visibleStore";
-import useTasksStore from "../../../Store/tasks";
-
+import useCompletedTasksStore from "../../../Store/completedTasks";
 export default function Completed({ title }) {
   const { isCVisible } = useVisible();
-  const { completedTasks } = useTasksStore();
+  const { completedTasks } = useCompletedTasksStore();
 
   return (
     <div className={`h-1/2 xl:w-1/2 xl:h-full`}>
