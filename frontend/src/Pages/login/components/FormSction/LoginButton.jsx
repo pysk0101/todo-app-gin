@@ -31,7 +31,7 @@ const LoginButton = ({ email, password }) => {
 
   return (
     <button
-      className={`bg-main2 dark:bg-main2Dark hover:bg-main2Dark dark:hover:bg-main2 rounded-xl text-bg1 dark:text-bg1Dark px-30 py-8 font-semibold`}
+      className={`bg-main2 dark:bg-darkPrimary hover:bg-darkPrimary dark:hover:bg-main2 rounded-xl text-secondary dark:text-darkSecondary px-30 py-8 font-semibold`}
       type="submit"
       onClick={login}
     >

@@ -5,20 +5,16 @@ const PromoSection = () => {
   const { isDark } = useDarkModeStore();
 
   return (
-    <div
-      className={`max-w-[60rem] max-[1600px]:flex max-[1600px]:flex-col max-[1600px]:justify-center max-[1600px]:items-center max-[1600px]:pt-5`}
-    >
+    <section className="max-w-[60rem] flex flex-col justify-center items-center pt-5 sm:pt-3">
       <img
-        className={`w-[40rem] max-[1600px]:w-[30rem] block max-[460px]:w-[25rem]`}
+        className="w-[40rem] sm:w-[30rem] block max-w-[460px]:w-[25rem]"
         src={isDark ? "/logo2.png" : "/Logo.png"}
-        alt=""
+        alt="Promo logo"
       />
-      <p
-        className={`text-main2 pr-5 dark:text-main2Dark text-5xl font-semibold max-[1600px]:text-4xl max-[1600px]:text-center max-[460px]:text-3xl`}
-      >
-        Add you task and done it.
+      <p className="text-main2 dark:text-darkPrimary text-5xl font-semibold text-center sm:text-4xl max-[460px]:text-3xl mt-5">
+        Add your tasks and get them done.
       </p>
-    </div>
+    </section>
   );
 };
 

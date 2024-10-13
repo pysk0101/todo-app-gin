@@ -18,7 +18,7 @@ const GenderSelection = () => {
           onClick={() => setGender("Female")}
           className={`p-1 px-3 text-3xl border border-[#00000090] dark:hover:bg-mainHoverDark ${
             gender === "Female"
-              ? "bg-main1 text-bg1 dark:bg-main1Dark dark:text-bg1Dark hover:bg-main1Dark dark:hover:bg-main1"
+              ? "bg-main1 text-secondary dark:bg-main1Dark dark:text-darkSecondary hover:bg-main1Dark dark:hover:bg-main1"
               : "hover:bg-mainHover dark:hover:bg-mainHoverDark"
           }`}
         >
@@ -28,7 +28,7 @@ const GenderSelection = () => {
           onClick={() => setGender("Male")}
           className={`p-1 px-6 text-3xl border border-[#00000090] dark:hover:bg-mainHoverDark ${
             gender === "Male"
-              ? "bg-main1 text-bg1 dark:bg-main1Dark dark:text-bg1Dark hover:bg-main1Dark dark:hover:bg-main1"
+              ? "bg-main1 text-secondary dark:bg-main1Dark dark:text-darkSecondary hover:bg-main1Dark dark:hover:bg-main1"
               : "hover:bg-mainHover dark:hover:bg-mainHoverDark"
           }`}
         >

@@ -17,7 +17,7 @@ const EmailInput = ({ placeholderName, extra, setType, length }) => {
 
   return (
     <input
-      className={`px-5 py-7 border text-black hover:bg-inputHover focus:bg-inputHover focus:outline-main2 border-[#00000090] dark:border-[#E0E0E050] rounded-xl ${extra}`}
+      className={`px-5 py-7 text-[#000000] dark:text-[#FFFFFF] border text-black hover:bg-inputHover focus:bg-inputHover focus:outline-none border-[#00000090] dark:border-[#E0E0E050] dark:bg-inputDark rounded-xl ${extra}`}
       type="text"
       placeholder={placeholderName}
       value={value}

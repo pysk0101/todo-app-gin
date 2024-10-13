@@ -112,7 +112,7 @@ const SignInButton = ({ toggleSignIn, isSignInActive }) => {
   return (
     <div className="flex items-center justify-center mt-5">
       <button
-        className="text-4xl max-[551px]:text-3xl w-[70%] bg-main1 dark:bg-main1Dark hover:bg-main1Dark dark:hover:bg-main1 rounded-xl text-bg1 dark:text-bg1Dark px-30 py-8 font-semibold"
+        className="text-4xl max-[551px]:text-3xl w-[70%] bg-main1 dark:bg-main1Dark hover:bg-main1Dark dark:hover:bg-main1 rounded-xl text-secondary dark:text-darkSecondary px-30 py-8 font-semibold"
         onClick={toggleSignIn}
       >
         Sign in
@@ -123,7 +123,7 @@ const SignInButton = ({ toggleSignIn, isSignInActive }) => {
           isSignInActive ? "" : "hidden"
         } absolute bg-[#00000040] w-full h-[100svh] top-0 left-0 z-40 flex items-center justify-center max-[1300px]:px-4`}
       >
-        <ul className="grid grid-cols-2 grid-rows-6 max-[700px]:grid-rows-8 gap-5 px-5 shadow-sm bg-bg1 dark:bg-bg1Dark rounded-xl max-[700px]:pb-4 max-[700px]:h-[50rem]">
+        <ul className="grid grid-cols-2 grid-rows-6 max-[700px]:grid-rows-8 gap-5 px-5 shadow-sm bg-secondary dark:bg-darkSecondary rounded-xl max-[700px]:pb-4 max-[700px]:h-[50rem]">
           <SignInHeader toggleSignIn={toggleSignIn} />
           <UserDetails
             isPasswordVisible={isPasswordVisible}
@@ -136,7 +136,7 @@ const SignInButton = ({ toggleSignIn, isSignInActive }) => {
           <li className="flex items-center justify-center col-span-1 row-span-2 max-[700px]:col-start-1 max-[700px]:col-end-3 max-[700px]:row-start-8">
             <button
               onClick={createNewAccount}
-              className="text-4xl max-[551px]:text-3xl w-[90%] max-[700px]:w-full bg-main1 dark:bg-main1Dark hover:bg-main1Dark dark:hover:bg-main1 rounded-xl text-bg1 dark:text-bg1Dark px-30 py-8 font-semibold"
+              className="text-4xl max-[551px]:text-3xl w-[90%] max-[700px]:w-full bg-main1 dark:bg-main1Dark hover:bg-main1Dark dark:hover:bg-main1 rounded-xl text-secondary dark:text-darkSecondary px-30 py-8 font-semibold"
             >
               Sign in
             </button>

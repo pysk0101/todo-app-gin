@@ -22,9 +22,9 @@ const PasswordInput = ({
   }, [signInDoneCounter]);
 
   return (
-    <div className={`relative hover:bg-inputHover ${extra}`}>
+    <div className={`relative  ${extra}`}>
       <input
-        className="px-5 py-7 pr-[4.5rem] first-line:border w-full text-black hover:bg-inputHover focus:bg-inputHover focus:outline-main2 border border-[#00000090] dark:border-[#E0E0E050] rounded-xl"
+        className="px-5 dark:bg-inputDark  py-7 pr-[4.5rem] first-line:border w-full text-[#000000] dark:text-[#FFFFFF] hover:bg-inputHover focus:bg-inputHover focus:outline-none border border-[#00000090] dark:border-[#E0E0E050] rounded-xl"
         type={isPasswordVisible ? "text" : "password"}
         placeholder="Password"
         value={value}
