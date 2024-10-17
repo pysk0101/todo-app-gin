@@ -7,15 +7,17 @@ export default function Tasks({ title }) {
   const { isVisible } = useVisible();
   const { tasks } = useTasksStore();
 
+  const uTasks = tasks.filter((t) => t.isCompleted === false);
+
   return (
     <div className={`h-1/2 xl:w-1/2 xl:h-full`}>
-      <NamedLine title={title} length={tasks.length} />
+      <NamedLine title={title} length={uTasks.length} />
       <div
         className={`list_1 flex flex-col py-2 gap-2 2xl:gap-4 h-full overflow-scroll ${
           !isVisible ? "" : "hidden"
         } `}
       >
-        {tasks.map((task) => (
+        {uTasks.map((task) => (
           <Task
             key={task.id}
             id={task.id}
