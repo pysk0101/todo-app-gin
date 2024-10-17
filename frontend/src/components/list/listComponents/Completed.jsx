@@ -23,6 +23,7 @@ export default function Completed({ title }) {
             title={task.title}
             date={task.date}
             isCompleted={task.isCompleted}
+            CompletedAt={task.CompletedAt}
           />
         ))}
       </div>

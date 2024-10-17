@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import Completed from "../components/list/listComponents/Completed";
 
 const getInitialState = () => {
   const storedTasks = localStorage.getItem("tasks");
@@ -21,6 +22,7 @@ const useTasksStore = create((set) => ({
         title,
         isCompleted: false,
         date: new Date().toISOString().slice(0, 10),
+        CompletedAt: null,
       };
       const updatedTasks = [...state.tasks, newTask];
       const updatedIdCounter = state.idCounter + 1;
@@ -57,8 +59,17 @@ const useTasksStore = create((set) => ({
   toggleTaskCompletion: (id) =>
     set((state) => {
       const updatedTasks = state.tasks.map((task) =>
-        task.id === id ? { ...task, isCompleted: !task.isCompleted } : task
+        task.id === id
+          ? {
+              ...task,
+              isCompleted: !task.isCompleted,
+              CompletedAt: !task.isCompleted
+                ? new Date().toISOString().slice(0, 10)
+                : task.CompletedAt,
+            }
+          : task
       );
+
       localStorage.setItem("tasks", JSON.stringify(updatedTasks));
       return {
         tasks: updatedTasks,
