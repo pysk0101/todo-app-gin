@@ -38,7 +38,9 @@ export default function Task({ id, title, date, isCompleted }) {
     >
       <p
         style={{ fontFamily: "Roboto Mono" }}
-        className={` text-text dark:text-darkText text-sm md:text-lg 2xl:text-2xl overflow-hidden`}
+        className={`${
+          isCompleted ? "line-through" : ""
+        } text-text dark:text-darkText text-sm md:text-lg 2xl:text-2xl overflow-hidden`}
       >
         {title}
       </p>

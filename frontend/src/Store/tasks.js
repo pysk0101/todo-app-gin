@@ -1,8 +1,18 @@
 import { create } from "zustand";
 
+const getInitialState = () => {
+  const storedTasks = localStorage.getItem("tasks");
+  const storedIdCounter = localStorage.getItem("idCounter");
+
+  return {
+    tasks: storedTasks ? JSON.parse(storedTasks) : [],
+    idCounter: storedIdCounter ? JSON.parse(storedIdCounter) : 0,
+  };
+};
+
 const useTasksStore = create((set) => ({
-  tasks: [],
-  idCounter: 0,
+  tasks: getInitialState().tasks,
+  idCounter: getInitialState().idCounter,
 
   addTask: (title) =>
     set((state) => {
@@ -10,32 +20,50 @@ const useTasksStore = create((set) => ({
         id: state.idCounter,
         title,
         isCompleted: false,
-        date: new Date().toISOString().slice(0, 10), // Use the current date
+        date: new Date().toISOString().slice(0, 10),
       };
+      const updatedTasks = [...state.tasks, newTask];
+      const updatedIdCounter = state.idCounter + 1;
+
+      localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+      localStorage.setItem("idCounter", JSON.stringify(updatedIdCounter));
+
       return {
-        tasks: [...state.tasks, newTask],
-        idCounter: state.idCounter + 1, // Increment the counter
+        tasks: updatedTasks,
+        idCounter: updatedIdCounter,
       };
     }),
 
   deleteTask: (id) =>
-    set((state) => ({
-      tasks: state.tasks.filter((task) => task.id !== id),
-    })),
+    set((state) => {
+      const updatedTasks = state.tasks.filter((task) => task.id !== id);
+      localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+      return {
+        tasks: updatedTasks,
+      };
+    }),
 
   editTask: (id, title) =>
-    set((state) => ({
-      tasks: state.tasks.map((task) =>
+    set((state) => {
+      const updatedTasks = state.tasks.map((task) =>
         task.id === id ? { ...task, title } : task
-      ),
-    })),
+      );
+      localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+      return {
+        tasks: updatedTasks,
+      };
+    }),
 
   toggleTaskCompletion: (id) =>
-    set((state) => ({
-      tasks: state.tasks.map((task) =>
+    set((state) => {
+      const updatedTasks = state.tasks.map((task) =>
         task.id === id ? { ...task, isCompleted: !task.isCompleted } : task
-      ),
-    })),
+      );
+      localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+      return {
+        tasks: updatedTasks,
+      };
+    }),
 }));
 
 export default useTasksStore;
