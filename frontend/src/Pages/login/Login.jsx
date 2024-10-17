@@ -1,3 +1,4 @@
+import { Component } from "react";
 import useDarkModeStore from "../../Store/darkMode";
 
 function Login() {
@@ -6,3 +7,5 @@ function Login() {
 }
 
 export default Login;
+
+Component;
