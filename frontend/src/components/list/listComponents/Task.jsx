@@ -29,10 +29,14 @@ export default function Task({ id, title, date, isCompleted, CompletedAt }) {
       extraClasses: "test",
       func: () => {
         const newTitle = window.prompt("Enter a new title ");
-        if (newTitle !== "" && typeof newTitle === "string") {
+        if (
+          newTitle !== "" &&
+          typeof newTitle === "string" &&
+          newTitle.length <= 80
+        ) {
           editTask(id, newTitle);
         } else {
-          alert("Invalid input.");
+          alert("Title cannot be empty or more than 80 characters");
         }
       },
     },
@@ -55,7 +59,7 @@ export default function Task({ id, title, date, isCompleted, CompletedAt }) {
 
   return (
     <div
-      className={`flex justify-between   gap-4 items-start p-2  pr-4 pl-6  rounded-3xl border-2 2xl:border-4 border-primary30 dark:border-darkPrimary30 bg-secondary dark:bg-darkSecondary shadow-sm 2xl:shadow-lg dark:shadow-darkPrimary10 `}
+      className={`flex justify-between hover:scale-[0.995] transition-all hover:shadow-lg   gap-4 items-start p-2  pr-4 pl-6  rounded-3xl border-2 2xl:border-4 border-primary30 dark:border-darkPrimary30 bg-secondary dark:bg-darkSecondary shadow-sm 2xl:shadow-md dark:shadow-darkPrimary10 `}
     >
       <div>
         <p
@@ -70,7 +74,7 @@ export default function Task({ id, title, date, isCompleted, CompletedAt }) {
           style={{ fontFamily: "Roboto Mono" }}
           className={`${
             isDateActive ? "" : "hidden"
-          } text-text dark:text-darkText text-sm  overflow-hidden`}
+          } text-text dark:text-darkText text-sm overflow-hidden`}
         >
           started at {date} {CompletedAt ? `, completed at ${CompletedAt}` : ""}
         </p>

@@ -65,7 +65,7 @@ const useTasksStore = create((set) => ({
               isCompleted: !task.isCompleted,
               CompletedAt: !task.isCompleted
                 ? new Date().toISOString().slice(0, 10)
-                : task.CompletedAt,
+                : null,
             }
           : task
       );
