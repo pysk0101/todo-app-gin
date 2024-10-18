@@ -24,6 +24,7 @@ export default function Completed({ title }) {
         length={length}
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
+        filterLength={cTasks.length}
       />
 
       <div

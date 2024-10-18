@@ -26,6 +26,7 @@ export default function Tasks({ title }) {
         length={length}
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
+        filterLength={uTasks.length}
       />
       <div
         className={`list_1 flex flex-col py-2 gap-2 2xl:gap-4 2xl:pt-4  h-full overflow-scroll ${

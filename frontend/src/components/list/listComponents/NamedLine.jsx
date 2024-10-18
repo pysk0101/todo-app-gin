@@ -7,6 +7,7 @@ export default function NamedLine({
   length,
   searchTerm,
   setSearchTerm,
+  filterLength,
 }) {
   const { isVisible, toggleIsVisible, isCVisible, toggleIsCVisible } =
     useVisible();
@@ -40,6 +41,13 @@ export default function NamedLine({
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
+          <div
+            className={`${
+              isFilterVisible ? "hidden" : ""
+            } font-semibold text-center w-9 2xl:text-lg`}
+          >
+            {filterLength}
+          </div>
           <Button
             icon={
               !isFilterVisible

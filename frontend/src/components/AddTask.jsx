@@ -3,11 +3,15 @@ import Button from "./Button";
 import useTasksStore from "../Store/tasks";
 
 export default function AddTask() {
-  const { addTask } = useTasksStore();
+  const { addTask, tasks } = useTasksStore();
   const [taskTitle, setTaskTitle] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (tasks.length >= 200) {
+      alert("Maximum number of tasks reached (200)");
+      return;
+    }
     if (taskTitle.trim()) {
       addTask(taskTitle);
       setTaskTitle("");
