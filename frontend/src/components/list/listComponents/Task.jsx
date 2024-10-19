@@ -52,15 +52,17 @@ export default function Task({ id, title, date, isCompleted, CompletedAt }) {
 
   return (
     <div
-      className={`flex justify-between hover:scale-[0.995] transition-all hover:shadow-lg   gap-4 items-start p-2  pr-3 pl-3  rounded-3xl border-2 2xl:border-4 border-primary30 dark:border-darkPrimary30 bg-secondary dark:bg-darkSecondary shadow-sm 2xl:shadow-md dark:shadow-darkPrimary10 `}
+      className={`flex justify-between hover:scale-[1.015] transition-all hover:shadow-lg   gap-4 items-start p-2  pr-3 pl-3  rounded-3xl border-2 2xl:border-4 border-primary30 dark:border-darkPrimary30 bg-secondary dark:bg-darkSecondary shadow-sm 2xl:shadow-md dark:shadow-darkPrimary10 `}
     >
       <div>
         <div className="flex items-center gap-2">
           <Button
             icon={isCompleted ? "material-symbols:done" : ""}
             extraClasses={` ${
-              isCompleted ? "bg-primary50 text-secondary" : "bg-secondary"
-            } border-[0.5px] w-5 h-5 text-2xl `}
+              isCompleted
+                ? "bg-primary50 text-secondary dark:bg-darkPrimary dark:text-darkSecondary"
+                : "bg-secondary dark:bg-darkSecondary"
+            } border-[0.5px] border-primary dark:border-darkPrimary w-5 h-5 text-2xl `}
             func={() => toggleTaskCompletion(id)}
           />
           <p

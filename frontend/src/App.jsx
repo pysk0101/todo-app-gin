@@ -18,7 +18,7 @@ function App() {
             <Route
               path="/"
               element={
-                <div className="pt-20 p-2 lg:px-5 min-h-[97.4svh] min-[2000px]:min-h-[100svh]">
+                <div className="pt-20 p-2 lg:px-5 min-h-[97.4svh]  custom:min-h-[100svh] ">
                   <AddTask />
                   <List />
                 </div>
